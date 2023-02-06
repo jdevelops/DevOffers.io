@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/DevOffers.io/static/css/main.95d50c4c.css",
+    "main.js": "/DevOffers.io/static/js/main.b214443a.js",
+    "index.html": "/DevOffers.io/index.html",
+    "main.95d50c4c.css.map": "/DevOffers.io/static/css/main.95d50c4c.css.map",
+    "main.b214443a.js.map": "/DevOffers.io/static/js/main.b214443a.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.95d50c4c.css",
+    "static/js/main.b214443a.js"
+  ]
+}
