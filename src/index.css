@@ -1,0 +1,392 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;800&family=VT323&display=swap");
+
+:root {
+  --archprimary: #12bca2;
+  --archsecondary: #6d15df;
+
+  --Main: #687e26;
+  --Secondary: #020202;
+  --LightMain: #b4bf93;
+  --DarkMain: #697044;
+  --Grey: #f0f0f0;
+  --White: #ffffff;
+  --Accent: #c94940;
+  --DarkGrey: #6a6262;
+}
+* {
+  box-sizing: border-box;
+}
+html {
+  font-size: 16px;
+}
+
+h1,
+h2,
+h3 {
+  margin: 0;
+}
+
+a:link {
+  text-decoration: none;
+}
+
+/* DEBUG BUTTONS HIDDEN*/
+.hidden {
+  display: none;
+}
+
+body {
+  margin: 0;
+  color: #333;
+  font-family: "Poppins";
+  background: var(--Grey);
+}
+nav {
+  background: var(--Main);
+  padding: 10px 20px;
+  text-align: center;
+}
+nav a {
+  color: #f2f2f2;
+  margin: 10px;
+  display: inline-block;
+  text-align: center;
+}
+nav h1 {
+  color: #fff;
+}
+.page {
+  max-width: 1200px;
+  margin: auto;
+  padding: 20px;
+}
+.home {
+}
+
+.home__title {
+  text-align: center;
+  text-decoration: dashed;
+  padding: 1rem;
+  font-size: 3rem;
+}
+
+/* smoothies list */
+.smoothies_list {
+  width: inherit;
+  margin-top: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+.smoothies_card {
+  width: 100%;
+  height: 180px;
+  background: var(--White);
+  box-sizing: border-box;
+  border-radius: 6px;
+  position: relative;
+  padding: 0.5rem;
+  display: flex;
+  -webkit-box-shadow: 4px 8px 18px -11px rgba(66, 68, 90, 0.3);
+  -moz-box-shadow: 4px 8px 18px -11px rgba(66, 68, 90, 0.3);
+  box-shadow: 4px 8px 18px -11px rgba(66, 68, 90, 0.3);
+}
+.smoothies_card .rating {
+  background: var(--DarkMain);
+  color: #fff;
+  border-radius: 6px;
+  width: 150px;
+  height: 0;
+  padding: 20px 0;
+  line-height: 0px;
+  text-align: center;
+}
+.smoothies_card .buttons {
+  text-align: right;
+}
+.smoothies_card i {
+  color: #bbb;
+  margin-left: 10px;
+  font-size: 1.2em;
+  padding: 6px;
+  background: #eeeeee;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.smoothies_logo-div {
+  height: 100%;
+  width: 120px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.smoothies_logo {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
+/* Główna część karty */
+.smoothies_main {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.smoothies_main h2 {
+  padding: 0 0 0.3rem 0;
+}
+.smoothies_main p {
+  margin: 0;
+}
+
+.smoothies_main-data {
+  color: var(--DarkGrey);
+  opacity: 0.85;
+}
+
+.smoothies_side {
+  display: flex;
+  flex-direction: column;
+  margin-left: auto;
+  justify-content: space-between;
+}
+
+.smoothies_side-open-helper {
+  display: flex;
+  justify-content: end;
+  align-items: end;
+}
+.smoothies_side-open {
+  width: 64px;
+  height: 64px;
+  background-color: #eeeeee;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #bbb;
+  margin-left: 10px;
+  font-size: 1.2em;
+  padding: 6px;
+  background: #eeeeee;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+a:visited {
+  text-decoration: none;
+}
+
+.smoothies_side-buttons {
+  display: flex;
+  justify-content: end;
+  align-items: end;
+}
+.smoothies_side-buttons i {
+  margin-left: 0.5rem;
+}
+
+/* forms */
+form {
+  background: #fff;
+  padding: 20px;
+  max-width: 480px;
+  margin: 0 auto;
+  border-radius: 6px;
+}
+form input,
+form textarea {
+  display: block;
+  width: 100%;
+  padding: 6px;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  margin: 10px 0 20px 0;
+}
+form button {
+  background: var(--LightMain);
+  color: #fff;
+  border: 0;
+  border-radius: 6px;
+  padding: 6px 8px;
+  font-family: "Poppins";
+  cursor: pointer;
+}
+
+/*----WYŚWIETLANIE OFERTY W NOWYM OKNIE ---*/
+.offer-view {
+  width: 1200px;
+  padding: 1rem;
+  background-color: var(--White);
+  margin: 0 auto;
+}
+.offer-view_wrapper {
+  display: flex;
+  flex-direction: column;
+}
+.offer-view_header {
+  display: flex;
+  flex-direction: row;
+  border: 1px solid red;
+  width: 100%;
+}
+
+.offer-view_header h2 {
+  margin: 0 auto;
+}
+
+.salary-div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.salary-div h3 {
+}
+.salary-div input {
+  width: 40%;
+}
+
+/* EXTRAS */
+
+/*REMOVING BUTTON FROM INPUT FIELD */
+/* Works for Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Works for Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+/* SeachBar*/
+
+.searchbar {
+  display: flex;
+  justify-content: space-between;
+  background-color: var(--White);
+  border-radius: 6px;
+}
+
+.searchbar_search {
+  width: 50%;
+  display: flex;
+}
+
+.searchbar_search input {
+  padding: 0.5rem;
+  margin: 0.5rem;
+  width: 80%;
+}
+
+.searchbar_sort {
+  width: 50%;
+  display: flex;
+}
+
+/* order-by buttons */
+.searchbar_sort button {
+  margin-right: 10px;
+  background: var(--LightMain);
+  color: #fff;
+  margin: 0.5rem;
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-family: "Poppins";
+  cursor: pointer;
+  border: 0px;
+}
+
+.searchbar_sort button:active {
+  background: var(--DarkGrey);
+}
+
+.searchbar_dsc {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 0.75rem;
+  color: var(--Secondary);
+  opacity: 0.8;
+}
+
+.searchbar_liked {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.5rem;
+}
+
+.searchbar_liked button {
+  margin-right: 10px;
+  background: var(--LightMain);
+  color: #fff;
+  margin: 0.5rem;
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-family: "Poppins";
+  cursor: pointer;
+  border: 0px;
+}
+.searchbar_liked button:active {
+  background: var(--DarkGrey);
+}
+
+.create_select {
+  padding: 0.5rem;
+}
+
+.login__title {
+  text-align: center;
+  padding: 1rem 1rem 2rem 1rem;
+  font-size: 2rem;
+}
+
+.login_footer {
+  padding: 20px;
+  max-width: 480px;
+  margin: 0 auto;
+  border-radius: 6px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.profile_card {
+  background: #fff;
+  padding: 20px;
+  max-width: 480px;
+  margin: 0 auto;
+  border-radius: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.profile_img {
+  width: 64px;
+  padding-bottom: 1rem;
+}
+
+.profile_footer {
+  width: 80%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.profile_footer button {
+  margin-right: 10px;
+  background: var(--LightMain);
+  color: #fff;
+  margin: 0.5rem;
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-family: "Poppins";
+  cursor: pointer;
+  border: 0px;
+}
