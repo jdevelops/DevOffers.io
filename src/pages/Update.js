@@ -33,10 +33,11 @@ const Update = () => {
     }
 
     const { data, error } = await supabase
-      .from("smoothies")
-      .update({
-        title,
-        company_name,
+        .from("smoothies") // wyszukuje z supabase tabli o nazwie "smoothies"
+        .update([
+          {
+            title,
+            company_name,
         recepie,
         link_url,
         position_level,
