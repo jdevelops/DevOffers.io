@@ -30,6 +30,15 @@ a:link {
   text-decoration: none;
 }
 
+pre {
+  overflow-x: auto;
+  white-space: pre-wrap;
+  white-space: -moz-pre-wrap;
+  white-space: -pre-wrap;
+  white-space: -o-pre-wrap;
+  word-wrap: break-word;
+}
+
 /* DEBUG BUTTONS HIDDEN*/
 .hidden {
   display: none;
@@ -95,23 +104,13 @@ nav h1 {
   background: var(--DarkMain);
   color: #fff;
   border-radius: 6px;
-  width: 150px;
   height: 0;
-  padding: 20px 0;
+  padding: 1.25rem 1rem;
   line-height: 0px;
   text-align: center;
 }
 .smoothies_card .buttons {
   text-align: right;
-}
-.smoothies_card i {
-  color: #bbb;
-  margin-left: 10px;
-  font-size: 1.2em;
-  padding: 6px;
-  background: #eeeeee;
-  border-radius: 50%;
-  cursor: pointer;
 }
 
 .smoothies_logo-div {
@@ -127,7 +126,8 @@ nav h1 {
   margin-right: auto;
   width: 50%;
 }
-/* Główna część karty */
+
+/* ======Główna część karty= ==========*/
 .smoothies_main {
   display: flex;
   flex-direction: column;
@@ -145,7 +145,41 @@ nav h1 {
   color: var(--DarkGrey);
   opacity: 0.85;
 }
-
+.smoothies_main-company {
+  margin-right: 1rem;
+  width: auto;
+  display: flex;
+  align-items: center;
+}
+.helper-icon {
+  cursor: default;
+  font-size: 18px;
+  padding-right: 0.33rem;
+}
+.main-icon {
+  color: #bbb;
+  margin-left: 10px;
+  font-size: 1.2em;
+  padding: 6px;
+  background: #eeeeee;
+  border-radius: 50%;
+  cursor: pointer;
+}
+.offer-icon {
+  cursor: default;
+  font-size: 26px;
+  padding-right: 0.33rem;
+}
+.smoothies_main-secondline {
+  display: flex;
+}
+.smoothies_main-location {
+  color: var(--DarkGrey);
+  width: auto;
+  display: flex;
+  align-items: center;
+}
+/* ======Boczna część karty= ==========*/
 .smoothies_side {
   display: flex;
   flex-direction: column;
@@ -187,7 +221,7 @@ a:visited {
   margin-left: 0.5rem;
 }
 
-/* forms */
+/* forms  BYŁ TO ZBYT OGÓLNY CSS DEPRECATED
 form {
   background: #fff;
   padding: 20px;
@@ -214,27 +248,74 @@ form button {
   cursor: pointer;
 }
 
+*/
+
 /*----WYŚWIETLANIE OFERTY W NOWYM OKNIE ---*/
 .offer-view {
-  width: 1200px;
-  padding: 1rem;
-  background-color: var(--White);
+  max-width: 1200px;
   margin: 0 auto;
 }
 .offer-view_wrapper {
+  background-color: var(--White);
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border-radius: 6px;
   display: flex;
   flex-direction: column;
 }
 .offer-view_header {
   display: flex;
   flex-direction: row;
-  border: 1px solid red;
   width: 100%;
 }
 
 .offer-view_header h2 {
   margin: 0 auto;
 }
+/*===Górna Sekcja ===*/
+.offer-view_topsection {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.offer-view_time {
+  text-align: end;
+  color: var(--DarkGrey);
+  opacity: 0.85;
+}
+.offer-view_salary {
+  font-size: 1.1rem;
+  background: var(--DarkGrey);
+  color: #fff;
+  border-radius: 6px;
+  height: 0;
+  padding: 2rem;
+  line-height: 0px;
+  text-align: center;
+}
+
+.offer-view_apply {
+  width: 12rem;
+  font-size: 1.25rem;
+  margin: 0 auto;
+  background: var(--Main);
+  color: #fff;
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-family: "Poppins";
+  cursor: pointer;
+  border: 1px solid var(--Main);
+}
+
+.offer-view_apply:active {
+  background: var(--LightMain);
+}
+
+.offer-view_apply:hover {
+  background-color: var(--DarkMain);
+  border: 1px solid var(--LightMain);
+}
+/*===Body===*/
 
 .salary-div {
   display: flex;
@@ -292,7 +373,7 @@ input[type="number"] {
 /* order-by buttons */
 .searchbar_sort button {
   margin-right: 10px;
-  background: var(--LightMain);
+  background: var(--Main);
   color: #fff;
   margin: 0.5rem;
   padding: 4px 8px;
@@ -337,8 +418,31 @@ input[type="number"] {
   background: var(--DarkGrey);
 }
 
-.create_select {
-  padding: 0.5rem;
+/*====Login Page===*/
+.login_form {
+  background: #fff;
+  padding: 20px;
+  max-width: 480px;
+  margin: 0 auto;
+  border-radius: 6px;
+}
+.login_form input,
+.login_form textarea {
+  display: block;
+  width: 100%;
+  padding: 6px;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  margin: 10px 0 20px 0;
+}
+.login_form button {
+  background: var(--LightMain);
+  color: #fff;
+  border: 0;
+  border-radius: 6px;
+  padding: 6px 8px;
+  font-family: "Poppins";
+  cursor: pointer;
 }
 
 .login__title {
@@ -389,4 +493,135 @@ input[type="number"] {
   font-family: "Poppins";
   cursor: pointer;
   border: 0px;
+}
+
+.break {
+  height: 1px;
+  background-color: var(--DarkGrey);
+  margin-bottom: 2rem;
+  opacity: 0.5;
+}
+
+/*=======NOWA/UPDATE OFERTY ======*/
+
+.update {
+  max-width: 800px;
+  margin: 0 auto;
+}
+.update__title {
+  text-align: center;
+  padding: 1rem;
+  font-size: 2rem;
+}
+
+.update_select {
+  padding: 0.5rem 0;
+}
+
+/*---FORMULARZ---*/
+.update_form {
+  background: #fff;
+  padding: 20px;
+  margin: 0 auto;
+  border-radius: 6px;
+}
+.update_form input,
+.update_form textarea {
+  display: block;
+  width: 100%;
+  padding: 6px;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  margin: 10px 0 20px 0;
+}
+.update_form button {
+  background: var(--LightMain);
+  color: #fff;
+  border: 0;
+  border-radius: 6px;
+  padding: 6px 8px;
+  font-family: "Poppins";
+  cursor: pointer;
+}
+
+.update_textarea {
+  resize: none;
+}
+/*--radio buttons w formulrzu--*/
+.update_radios {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem;
+}
+.update_radios > div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.update_radios input[type="radio"] {
+  box-sizing: border-box;
+  appearance: none;
+  background: white;
+  outline: 2px solid #333;
+  border: 3px solid white;
+  width: 16px;
+  height: 16px;
+  margin: 0 0 0 1rem;
+}
+.update_radios input[type="radio"]:checked {
+  transition-duration: 0.8s;
+  transition-property: background-color;
+  background-color: var(--Accent);
+}
+
+/*----salary w formularzu ---*/
+
+.update_salary {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 1.5rem;
+}
+
+.update_salary > div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.update_salary > div > input {
+  width: auto;
+  margin: 0 1rem;
+}
+
+.update_btn {
+  width: 12rem;
+  font-size: 1.25rem;
+  margin: auto auto;
+  background: var(--Main);
+  color: #fff;
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-family: "Poppins";
+  cursor: pointer;
+  border: 1px solid var(--Main);
+}
+
+.update_btn:active {
+  background: var(--LightMain);
+}
+
+.update_btn:hover {
+  background-color: var(--DarkMain);
+  border: 1px solid var(--LightMain);
+}
+
+.error_border {
+  border: 2px solid red !important;
+}
+.error_dsc {
+  color: var(--Accent);
 }

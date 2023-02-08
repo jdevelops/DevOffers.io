@@ -42,7 +42,7 @@ const SignUp = () => {
   return (
     <div>
       <h1 className="login__title">Zarejestruj się</h1>
-      <form onSubmit={handleSubmit}>
+      <form className="login_form" onSubmit={handleSubmit}>
         <input
           placeholder="Nazwa użytkownika"
           name="fullName"

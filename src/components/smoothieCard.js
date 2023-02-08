@@ -138,47 +138,60 @@ const SmoothieCard = ({ smoothie, onDeleteProp, token }) => {
       <div className="smoothies_main">
         <div>
           <h2>{smoothie.title.toUpperCase()}</h2>
-          <div className="company-name">{smoothie.company_name}</div>
-          <div className="position-level">{smoothie.position_level}</div>
+
+          <span className="smoothies_main-company">
+            <i className="material-icons helper-icon">work</i>
+            {smoothie.company_name.toUpperCase()}
+          </span>
+
+          <div className="position-level">
+            {smoothie.position_level.toUpperCase()}
+          </div>
         </div>
 
-        <div className="smoothies_main-data">
-          <p>{timeCalc()}</p>
+        <div>
+          <span className="smoothies_main-location">
+            <i className="material-icons helper-icon">place</i>
+            {smoothie.location}
+          </span>
+          <div className="smoothies_main-data">
+            <p>{timeCalc()}</p>
+          </div>
         </div>
       </div>
 
       <div className="smoothies_side">
         <div className="rating">
-          {smoothie.salary_low} - {smoothie.salary_top}zł
+          {smoothie.salary_low} - {smoothie.salary_top} PLN
         </div>
         <div className="smoothies_side-open-helper">
           <Link className="smoothies_side-open" to={"/" + smoothie.id}>
-            <i className="material-icons">arrow_forward_ios</i>
+            <i className="material-icons main-icon">arrow_forward_ios</i>
           </Link>
         </div>
         <div className="smoothies_side-buttons">
-          {!token && <i className="material-icons"></i>}
+          {!token && <i className="material-icons main-icon"></i>}
 
           {smoothie.created_by === token.user.id && (
-            <i className="material-icons" onClick={handleDelete}>
+            <i className="material-icons main-icon" onClick={handleDelete}>
               delete
             </i>
           )}
           {smoothie.created_by === token.user.id && (
             <Link to={"/" + smoothie.id + "/edit"}>
-              <i className="material-icons">edit</i>
+              <i className="material-icons main-icon">edit</i>
             </Link>
           )}
 
           {token.user && (
             <div onClick={handleFav}>
               {favFlag && (
-                <i onClick={handleFav} className="material-icons">
+                <i onClick={handleFav} className="material-icons main-icon">
                   star
                 </i>
               )}
               {!favFlag && (
-                <i onClick={handleFav} className="material-icons">
+                <i onClick={handleFav} className="material-icons main-icon">
                   star_border
                 </i>
               )}
@@ -186,8 +199,10 @@ const SmoothieCard = ({ smoothie, onDeleteProp, token }) => {
           )}
           {!token.user && (
             <div disabled="disabled">
-              {favFlag && <i className="material-icons">star</i>}
-              {!favFlag && <i className="material-icons">star_border</i>}
+              {favFlag && <i className="material-icons main-icon">star</i>}
+              {!favFlag && (
+                <i className="material-icons main-icon ">star_border</i>
+              )}
             </div>
           )}
         </div>

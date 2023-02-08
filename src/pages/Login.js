@@ -43,7 +43,7 @@ const Login = ({ setToken }) => {
   return (
     <div className="page">
       <h1 className="login__title">Zaloguj się</h1>
-      <form onSubmit={handleSubmit}>
+      <form className="login_form" onSubmit={handleSubmit}>
         <input placeholder="Email" name="email" onChange={handleChange} />
 
         <input
