@@ -100,7 +100,7 @@ nav h1 {
   -moz-box-shadow: 4px 8px 18px -11px rgba(66, 68, 90, 0.3);
   box-shadow: 4px 8px 18px -11px rgba(66, 68, 90, 0.3);
 }
-.smoothies_card .rating {
+.rating {
   background: var(--DarkMain);
   color: #fff;
   border-radius: 6px;
@@ -352,6 +352,7 @@ input[type="number"] {
   justify-content: space-between;
   background-color: var(--White);
   border-radius: 6px;
+  padding-top: 1rem;
 }
 
 .searchbar_search {
@@ -469,6 +470,9 @@ input[type="number"] {
   display: flex;
   flex-direction: column;
   align-items: center;
+  -webkit-box-shadow: 4px 8px 18px -11px rgba(66, 68, 90, 0.3);
+  -moz-box-shadow: 4px 8px 18px -11px rgba(66, 68, 90, 0.3);
+  box-shadow: 4px 8px 18px -11px rgba(66, 68, 90, 0.3);
 }
 
 .profile_img {
@@ -524,6 +528,9 @@ input[type="number"] {
   padding: 20px;
   margin: 0 auto;
   border-radius: 6px;
+  -webkit-box-shadow: 4px 8px 18px -11px rgba(66, 68, 90, 0.3);
+  -moz-box-shadow: 4px 8px 18px -11px rgba(66, 68, 90, 0.3);
+  box-shadow: 4px 8px 18px -11px rgba(66, 68, 90, 0.3);
 }
 .update_form input,
 .update_form textarea {
@@ -624,4 +631,299 @@ input[type="number"] {
 }
 .error_dsc {
   color: var(--Accent);
+}
+
+/*=======================MOBILE==============================*/
+@media only screen and (max-width: 768px) {
+  /*===========Home=============*/
+  .home__title {
+    font-size: 2.5rem;
+  }
+  .searchbar {
+    flex-direction: column;
+    align-items: center;
+  }
+  .searchbar_search {
+    justify-content: center;
+    width: 90%;
+  }
+  .searchbar_sort {
+    width: 90%;
+    justify-content: center;
+  }
+  .searchbar_dsc {
+    display: none;
+  }
+
+  /*===========card=============*/
+  .smoothies_card {
+    height: 200px;
+  }
+
+  .smoothies_main > div > h2 {
+    font-size: 1rem;
+    padding-bottom: 0.5rem;
+  }
+  .smoothies_main-data {
+    font-size: 0.75rem;
+  }
+  .smoothies_main-location {
+    font-size: 0.75rem;
+  }
+
+  .smoothies_main-company {
+    font-size: 0.8rem;
+  }
+  .smoothies_logo-div {
+    width: 100px;
+  }
+
+  /*====offerview====*/
+  .position-level {
+    font-size: 0.85rem;
+  }
+  .rating {
+    display: flex;
+    padding: 0.85rem;
+    font-size: 0.85rem;
+  }
+
+  .offer-view_salary {
+    padding: 1rem 0.75rem;
+    font-size: 0.75rem;
+  }
+  .offer-view_level {
+    font-size: 0.85rem;
+  }
+  .update_form {
+    padding: 1rem;
+  }
+  .update__title {
+    font-size: 1.5rem;
+    padding-top: 0;
+  }
+
+  .update_radios {
+    padding: 0.5rem;
+  }
+  .update_radios > div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .update_radios input[type="radio"] {
+    box-sizing: border-box;
+    appearance: none;
+    background: white;
+    outline: 2px solid #333;
+    border: 3px solid white;
+    width: 15px;
+    height: 15px;
+    margin: 0.5rem 0 0 0;
+    padding: 0 0 0 0;
+  }
+  .update_salary_dsc {
+    padding-top: 1rem;
+  }
+  .update_salary {
+    padding: 1.5rem 0.5rem;
+    flex-direction: column;
+  }
+  .update_salary > div {
+    display: flex;
+    justify-content: flex-start;
+    padding: 0.75rem 0.25rem;
+    box-sizing: content-box;
+  }
+  .update_salary > div > label {
+    display: block;
+    width: 30px;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  /*===========Home=============*/
+  .home__title {
+    font-size: 2.5rem;
+  }
+  .searchbar {
+    flex-direction: column;
+    align-items: center;
+  }
+  .searchbar_search {
+    justify-content: center;
+    width: 90%;
+  }
+  .searchbar_sort {
+    width: 90%;
+    justify-content: center;
+  }
+  .searchbar_dsc {
+    display: none;
+  }
+
+  /*===========card=============*/
+  .smoothies_card {
+    height: 200px;
+  }
+
+  .smoothies_main > div > h2 {
+    font-size: 1rem;
+    padding-bottom: 0.5rem;
+  }
+  .smoothies_main-data {
+    font-size: 0.75rem;
+  }
+  .smoothies_main-location {
+    font-size: 0.75rem;
+  }
+
+  .smoothies_main-company {
+    font-size: 0.8rem;
+  }
+  .smoothies_logo-div {
+    width: 100px;
+  }
+
+  /*====offerview====*/
+  .position-level {
+    font-size: 0.75rem;
+  }
+  .rating {
+    display: flex;
+    padding: 0.75rem;
+    font-size: 0.75rem;
+  }
+
+  .offer-view_salary {
+    padding: 1rem 0.75rem;
+    font-size: 0.65rem;
+  }
+  .offer-view_level {
+    font-size: 0.75rem;
+  }
+  .update_form {
+    padding: 1rem;
+  }
+  .update__title {
+    font-size: 1.5rem;
+    padding-top: 0;
+  }
+
+  .update_radios {
+    padding: 0.5rem;
+  }
+  .update_radios > div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .update_radios input[type="radio"] {
+    box-sizing: border-box;
+    appearance: none;
+    background: white;
+    outline: 2px solid #333;
+    border: 3px solid white;
+    width: 15px;
+    height: 15px;
+    margin: 0.5rem 0 0 0;
+    padding: 0 0 0 0;
+  }
+  .update_salary_dsc {
+    padding-top: 1rem;
+  }
+  .update_salary {
+    padding: 1.5rem 0.5rem;
+    flex-direction: column;
+  }
+  .update_salary > div {
+    display: flex;
+    justify-content: flex-start;
+    padding: 0.75rem 0.25rem;
+    box-sizing: content-box;
+  }
+  .update_salary > div > label {
+    display: block;
+  }
+}
+
+@media only screen and (max-width: 364px) {
+  html {
+    font-size: 0.9rem;
+  }
+  /*===========Home=============*/
+  .home__title {
+    font-size: 2rem;
+  }
+
+  /*===========card=============*/
+
+  .smoothies_logo-div {
+    display: none;
+  }
+
+  /*====offerview====*/
+  .offer-view_salary {
+    padding: 0.8rem 0.75rem;
+    font-size: 0.65rem;
+  }
+  .smoothies_card {
+    height: 180px;
+    padding: 1rem;
+  }
+  .rating {
+    display: flex;
+    padding: 0.75rem 0.65rem;
+    font-size: 0.75rem;
+  }
+  /*====update/create====*/
+  .update_form {
+    padding: 1rem;
+  }
+  .update__title {
+    font-size: 1.5rem;
+    padding-top: 0;
+  }
+
+  .update_radios {
+    padding: 0.5rem;
+  }
+  .update_radios > div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .update_radios input[type="radio"] {
+    box-sizing: border-box;
+    appearance: none;
+    background: white;
+    outline: 2px solid #333;
+    border: 3px solid white;
+    width: 15px;
+    height: 15px;
+    margin: 0.5rem 0 0 0;
+    padding: 0 0 0 0;
+  }
+  .update_salary_dsc {
+    padding-top: 1rem;
+  }
+  .update_salary {
+    padding: 1.5rem 0.5rem;
+    flex-direction: column;
+  }
+  .update_salary > div {
+    display: flex;
+    justify-content: flex-start;
+    padding: 0.75rem 0.25rem;
+    box-sizing: content-box;
+  }
+  .update_salary > div > label {
+    display: block;
+  }
 }

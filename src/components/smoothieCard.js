@@ -162,7 +162,8 @@ const SmoothieCard = ({ smoothie, onDeleteProp, token }) => {
 
       <div className="smoothies_side">
         <div className="rating">
-          {smoothie.salary_low} - {smoothie.salary_top} PLN
+          <span>{smoothie.salary_low}</span>
+          <span>-</span> <span>{smoothie.salary_top}</span> <span> PLN</span>
         </div>
         <div className="smoothies_side-open-helper">
           <Link className="smoothies_side-open" to={"/" + smoothie.id}>

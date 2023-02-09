@@ -49,6 +49,7 @@ const Offer = () => {
     return outputValue;
   }
   useEffect(() => {
+    window.scrollTo(0, 0);
     const fetchSmoothie = async () => {
       const { data, error } = await supabase
         .from("smoothies") // pobranie z tabeli
@@ -109,7 +110,7 @@ const Offer = () => {
               <i className="material-icons offer-icon">place</i>
               {location.toUpperCase()}
             </p>
-            <p>Poziom stanowiska: {position_level}</p>
+            <p className="offer-view_level">Poziom: {position_level}</p>
           </div>
           <div>
             <p className="offer-view_time">{timeCalc()}</p>
@@ -124,32 +125,7 @@ const Offer = () => {
           <h2>OPIS STANOWISKA</h2>
         </div>
         <pre>
-          <p>
-            Text: {method}
-            Laboris non pariatur nostrud amet reprehenderit culpa pariatur
-            consectetur aliquip. Ullamco eu qui ipsum Lorem Lorem qui aliqua
-            tempor ut ullamco occaecat amet non. Tempor velit id duis duis esse
-            irure mollit. Ex fugiat exercitation qui qui eu deserunt proident
-            Lorem. Duis esse incididunt tempor in occaecat pariatur sint
-            officia. Sint eiusmod cillum minim deserunt fugiat eiusmod do
-            ullamco non. Magna minim esse id laboris nostrud velit deserunt eu
-            id dolore sit excepteur non. Nulla ex proident id dolore Lorem anim
-            ipsum nostrud exercitation amet ea. Sit officia in laborum esse
-            dolore cupidatat minim incididunt ad nulla. Id occaecat sint
-            reprehenderit nulla. Aliquip occaecat veniam mollit ut cupidatat
-            excepteur labore qui officia irure aute ipsum. Commodo est enim
-            fugiat sunt. Cupidatat sint nulla amet pariatur cillum ullamco
-            officia. Officia eu quis qui ullamco excepteur. Qui incididunt ipsum
-            proident adipisicing consequat velit deserunt sit amet eu. Culpa
-            duis eiusmod minim id labore velit laboris exercitation. Do anim
-            enim nostrud eiusmod id sunt. Eu ut voluptate velit anim fugiat
-            excepteur aliqua magna minim. Aute irure dolor exercitation dolor
-            proident consectetur aute quis. Incididunt in exercitation fugiat
-            aute occaecat ad. Irure sit Lorem mollit excepteur ipsum incididunt
-            irure duis consequat non. Duis sint officia voluptate irure labore.
-            Sunt cupidatat occaecat cillum aliqua Lorem duis excepteur ullamco
-            enim.
-          </p>
+          <p>{method}</p>
         </pre>
         <div className="break"></div>
         <button className="update_btn" onClick={redirectFoo}>

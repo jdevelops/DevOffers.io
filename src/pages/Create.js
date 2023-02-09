@@ -326,7 +326,7 @@ const Create = () => {
             </div>
           </div>
         </div>
-        <h3>Zarobki</h3>
+        <h3 className="update_salary_dsc">Zarobki</h3>
         <span className="error_dsc">
           {inputError === "salary" ? inputErrordsc : ""}
         </span>
