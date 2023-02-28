@@ -5,11 +5,11 @@ import { useEffect, useState } from "react";
 
 // components
 
-import SmoothieCard from "../components/smoothieCard";
+import OfferCard from "../components/offerCard";
 
 const CreatedOffers = ({ token }) => {
   const [fetchError, setFetchError] = useState(null); // Fetch error, zmienna
-  const [smoothies, setSmoothies] = useState(null); // główna baza
+  const [offers, setOffers] = useState(null); // główna baza
   const [orderBy, setOrderBy] = useState("created_at"); // created_at jest nazwa kolumny w bazie
   const [orderLocaly, setOrderLocaly] = useState("Sortowanie ");
   const [orderAscd, setOrderAscd] = useState(true);
@@ -19,18 +19,16 @@ const CreatedOffers = ({ token }) => {
 
   //Funkcja usuwająca wpis lokalnie
   const handleDelete = (id) => {
-    setSmoothies((pervSmoothies) => {
-      return pervSmoothies.filter((sm) => sm.id !== id);
+    setOffers((pervOffers) => {
+      return pervOffers.filter((sm) => sm.id !== id);
     });
   };
   //Funcjka sortująca
   function handleSortEffect(e) {
-    console.log(e.target.id);
     //setSortEffect(e.target.id);
     zmiennaEffect = e.target.id;
     switch (zmiennaEffect) {
       case "az":
-        console.log(e.target);
         e.target.classList.add("searchbar--active");
         break;
       case "data":
@@ -46,161 +44,165 @@ const CreatedOffers = ({ token }) => {
 
   //funkcja fetchujaca dane z database
   useEffect(() => {
-    const fetchSmoothies = async () => {
+    const fetchOffers = async () => {
       const { data, error } = await supabase
-        .from("smoothies")
+        .from("offers")
         .select()
         .order(orderBy, { ascending: false }); // const { data, error } -> destrukturyzacja obiektu po lewej
 
       if (error) {
         setFetchError("Can;t fetch ");
-        setSmoothies(null);
+        setOffers(null);
         console.log(error);
       }
       if (data) {
-        setSmoothies(data);
+        setOffers(data);
         setFetchError(null);
-        console.log("POBRANO");
       }
     };
 
-    fetchSmoothies();
+    fetchOffers();
   }, []); //[orderBy] powoduje wywołanie Hooka useEffect za każdym użyciem orderby // brak tylko pojedyncze wywołanie
 
   return (
-    <div className="page home">
-      <h1>TWOJE OFERTY</h1>
-      {fetchError && <p>{fetchError}</p>}
-      {smoothies && (
-        <div className="smoothies">
-          {/*Search/sort bar */}
-          <div className="searchbar">
-            {/*Search input */}
-            <div className="searchbar_search">
-              <input
-                onChange={(event) => setQuery(event.target.value)}
-                placeholder="WYSZUKAJ"
-              />
+    <div className="page">
+      {/*Wrapper*/}
+      <div className="home">
+        <h1 className="home__title">Twoje Oferty</h1>
+        {fetchError && <p>{fetchError}</p>}
+        {offers && (
+          <div className="offers">
+            {/*Search/sort bar */}
+            <div className="searchbar">
+              {/*Search input */}
+              <div className="searchbar_search">
+                <input
+                  onChange={(event) => setQuery(event.target.value)}
+                  placeholder="WYSZUKAJ"
+                />
+              </div>
+
+              {/*OPCJE SORTOWANIA  */}
+              <div className="searchbar_sort">
+                <button
+                  id="data"
+                  onClick={(obj) => {
+                    handleSortEffect(obj);
+                    offers.sort(function (a, b) {
+                      const dateA = a.created_at;
+                      const dateB = b.created_at;
+                      if (dateA > dateB) {
+                        return -1;
+                      }
+                      if (dateA < dateB) {
+                        return 1;
+                      }
+                      return 0;
+                    });
+                    if (orderAscd) {
+                      setOffers(offers.reverse());
+                      setOrderLocaly("Najstarsze najpierw ");
+                      setOrderAscd(!orderAscd);
+                    } else if (!orderAscd) {
+                      setOrderLocaly("Najnowsze najpierw");
+                      setOffers(offers);
+                      setOrderAscd(!orderAscd);
+                    }
+                  }}
+                >
+                  DATA
+                </button>
+
+                <button
+                  id="az"
+                  onClick={(obj) => {
+                    handleSortEffect(obj);
+                    offers.sort(function (a, b) {
+                      const nameA = a.title.toUpperCase(); // ignore upper and lowercase
+                      const nameB = b.title.toUpperCase(); // ignore upper and lowercase
+                      if (nameA > nameB) {
+                        return -1;
+                      }
+                      if (nameA < nameB) {
+                        return 1;
+                      }
+                      // names must be equal
+                      return 0;
+                    });
+                    if (orderAscd) {
+                      setOffers(offers.reverse());
+                      setOrderLocaly("Alfabetycznie rosnoąco");
+                      setOrderAscd(!orderAscd);
+                    } else if (!orderAscd) {
+                      setOrderLocaly("Alfabetycznie malejąco");
+                      setOffers(offers);
+                      setOrderAscd(!orderAscd);
+                    }
+                  }}
+                >
+                  A-Z
+                </button>
+                <button
+                  id="salary"
+                  onClick={(obj) => {
+                    handleSortEffect(obj);
+                    offers.sort(function (a, b) {
+                      const salaryRangeA = (a.salary_low + a.salary_top) / 2;
+                      const salaryRangeB = (b.salary_low + b.salary_top) / 2;
+                      if (salaryRangeA < salaryRangeB) {
+                        return 1;
+                      }
+                      if (salaryRangeA > salaryRangeB) {
+                        return -1;
+                      }
+                      return 0;
+                    });
+                    if (orderAscd) {
+                      setOffers(offers.reverse());
+                      setOrderLocaly("widełki rosnoąco");
+                      setOrderAscd(!orderAscd);
+                    } else if (!orderAscd) {
+                      setOffers(offers);
+                      setOrderLocaly("widełki malejąco");
+                      setOrderAscd(!orderAscd);
+                    }
+                  }}
+                >
+                  STAWKA
+                </button>
+                <p className="searchbar_dsc">
+                  Obecne sortowanie: {orderLocaly}
+                </p>
+              </div>
             </div>
-
-            {/*OPCJE SORTOWANIA  */}
-            <div className="searchbar_sort">
-              <button
-                id="data"
-                onClick={(obj) => {
-                  handleSortEffect(obj);
-                  smoothies.sort(function (a, b) {
-                    const dateA = a.created_at;
-                    const dateB = b.created_at;
-                    if (dateA > dateB) {
-                      return -1;
-                    }
-                    if (dateA < dateB) {
-                      return 1;
-                    }
-                    return 0;
-                  });
-                  if (orderAscd) {
-                    setSmoothies(smoothies.reverse());
-                    setOrderLocaly("Najstarsze najpierw ");
-                    setOrderAscd(!orderAscd);
-                  } else if (!orderAscd) {
-                    setOrderLocaly("Najnowsze najpierw");
-                    setSmoothies(smoothies);
-                    setOrderAscd(!orderAscd);
+            {/*WYSWIETLANIE POSTÓW Z FILTREM I SORTOWANIEM  */}
+            <div className="offers_list">
+              {offers
+                .filter((post) => {
+                  if (query === "") {
+                    return post;
+                  } else if (
+                    post.title.toLowerCase().includes(query.toLowerCase())
+                  ) {
+                    return post;
                   }
-                }}
-              >
-                DATA
-              </button>
-
-              <button
-                id="az"
-                onClick={(obj) => {
-                  handleSortEffect(obj);
-                  smoothies.sort(function (a, b) {
-                    const nameA = a.title.toUpperCase(); // ignore upper and lowercase
-                    const nameB = b.title.toUpperCase(); // ignore upper and lowercase
-                    if (nameA > nameB) {
-                      return -1;
-                    }
-                    if (nameA < nameB) {
-                      return 1;
-                    }
-                    // names must be equal
-                    return 0;
-                  });
-                  if (orderAscd) {
-                    setSmoothies(smoothies.reverse());
-                    setOrderLocaly("Alfabetycznie rosnoąco");
-                    setOrderAscd(!orderAscd);
-                  } else if (!orderAscd) {
-                    setOrderLocaly("Alfabetycznie malejąco");
-                    setSmoothies(smoothies);
-                    setOrderAscd(!orderAscd);
+                })
+                .map((post) => {
+                  if (post.created_by === token.user.id) {
+                    return (
+                      <OfferCard
+                        key={post.id}
+                        offer={post}
+                        onDeleteProp={handleDelete}
+                        token={token}
+                      />
+                    );
                   }
-                }}
-              >
-                A-Z
-              </button>
-              <button
-                id="salary"
-                onClick={(obj) => {
-                  handleSortEffect(obj);
-                  smoothies.sort(function (a, b) {
-                    const salaryRangeA = (a.salary_low + a.salary_top) / 2;
-                    const salaryRangeB = (b.salary_low + b.salary_top) / 2;
-                    if (salaryRangeA < salaryRangeB) {
-                      return 1;
-                    }
-                    if (salaryRangeA > salaryRangeB) {
-                      return -1;
-                    }
-                    return 0;
-                  });
-                  if (orderAscd) {
-                    setSmoothies(smoothies.reverse());
-                    setOrderLocaly("widełki rosnoąco");
-                    setOrderAscd(!orderAscd);
-                  } else if (!orderAscd) {
-                    setSmoothies(smoothies);
-                    setOrderLocaly("widełki malejąco");
-                    setOrderAscd(!orderAscd);
-                  }
-                }}
-              >
-                STAWKA
-              </button>
-              <p className="searchbar_dsc">Obecne sortowanie: {orderLocaly}</p>
+                })}
             </div>
           </div>
-          {/*WYSWIETLANIE POSTÓW Z FILTREM I SORTOWANIEM  */}
-          <div className="smoothies_list">
-            {smoothies
-              .filter((post) => {
-                if (query === "") {
-                  return post;
-                } else if (
-                  post.title.toLowerCase().includes(query.toLowerCase())
-                ) {
-                  return post;
-                }
-              })
-              .map((post) => {
-                if (post.created_by === token.user.id) {
-                  return (
-                    <SmoothieCard
-                      key={post.id}
-                      smoothie={post}
-                      onDeleteProp={handleDelete}
-                      token={token}
-                    />
-                  );
-                }
-              })}
-          </div>
-        </div>
-      )}
+        )}
+      </div>
     </div>
   );
 };
@@ -208,14 +210,14 @@ const CreatedOffers = ({ token }) => {
 export default CreatedOffers;
 /*  INSERT IN 219 LINE IF YOU WANT TO BACKUP OLD SHOW METHOD 
 
-          <div className="smoothie-grid">
-            {smoothies.map((smoothie) => (
-              //<p>{smoothie.title}</p> //
+          <div className="offer-grid">
+            {offers.map((offer) => (
+              //<p>{offer.title}</p> //
               <SmoothieCard
-                key={smoothie.id}
-                smoothie={smoothie}
+                key={offer.id}
+                offer={offer}
                 onDeleteProp={handleDelete}
-              /> //smoothie={smoothie} -> smoothie jest to prop do którego przekazujemy zmienna smoothie tak jak w Svelte
+              /> //offer={offer} -> offer jest to prop do którego przekazujemy zmienna offer tak jak w Svelte
             ))}
           </div>
 
@@ -224,7 +226,7 @@ export default CreatedOffers;
 
 /*     SHOW FOO 
 
-<div className="smoothie-grid">
+<div className="offer-grid">
             foo2
             {foundUsers && foundUsers.length > 0 ? (
               foundUsers.map((foundSmoothies) => {
@@ -232,7 +234,7 @@ export default CreatedOffers;
                   return (
                     <SmoothieCard
                       key={foundSmoothies.id}
-                      smoothie={foundSmoothies}
+                      offer={foundSmoothies}
                       onDeleteProp={handleDelete}
                       token={token}
                     />
@@ -246,14 +248,14 @@ export default CreatedOffers;
           </div> */
 
 /*  SHOW FOO V3
-          <div className="smoothie-grid">
+          <div className="offer-grid">
             foo3
-            {smoothies.map((smoothie) => {
-              if (smoothie.created_by === token.user.id) {
+            {offers.map((offer) => {
+              if (offer.created_by === token.user.id) {
                 return (
                   <SmoothieCard
-                    key={smoothie.id}
-                    smoothie={smoothie}
+                    key={offer.id}
+                    offer={offer}
                     onDeleteProp={handleDelete}
                   />
                 );
@@ -275,10 +277,10 @@ export default CreatedOffers;
 /*PIERWOWZÓR SEARCH BARA
                         <div className="user-list">
               {foundUsers && foundUsers.length > 0 ? (
-                foundUsers.map((smoothies) => (
-                  <li key={smoothies.id} className="user">
-                    <span className="user-id">{smoothies.id}</span>
-                    <span className="user-name">{smoothies.title}</span>
+                foundUsers.map((offers) => (
+                  <li key={offers.id} className="user">
+                    <span className="user-id">{offers.id}</span>
+                    <span className="user-name">{offers.title}</span>
                   </li>
                 ))
               ) : (
@@ -310,14 +312,14 @@ export default CreatedOffers;
     console.log("e target z filtr foo");
 
     if (name !== "") {
-      console.log(smoothies);
-      const results = smoothies.filter((user) => {
+      console.log(offers);
+      const results = offers.filter((user) => {
         return user.title.toLowerCase().includes(name.toLowerCase());
-        // Use the toLowerCase() method to make it case-insensitive
+        // Use the toLowerCase() description to make it case-insensitive
       });
       setFoundUsers(results);
     } else {
-      setFoundUsers(smoothies);
+      setFoundUsers(offers);
       // If the text field is empty, show all users
     }
   };
@@ -327,7 +329,7 @@ export default CreatedOffers;
             <div className="debug">
             <button
               onClick={() => {
-                console.log(smoothies);
+                console.log(offers);
                 console.log("CONSOL LOG DO WYŚWEITLANIA WARUNKOWEGO ");
               }}
             >

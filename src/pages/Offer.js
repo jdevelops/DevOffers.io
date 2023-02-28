@@ -9,7 +9,7 @@ const Offer = () => {
   const [title, setTitle] = useState("");
   const [company_name, setCompany_Name] = useState("");
   const [location, setLocation] = useState("");
-  const [method, setMethod] = useState(""); // potencjalnie zmienić na recepie
+  const [description, setMethod] = useState(""); // potencjalnie zmienić na recepie
   const [url, setUrl] = useState("");
   const [data, setData] = useState("");
   const [salary_low, setSalaryLow] = useState(0);
@@ -17,7 +17,6 @@ const Offer = () => {
   const [position_level, setPosition_Level] = useState("Mid");
   const [category_logo, setCategoryLogo] = useState("");
   const [fromError, setFormError] = useState(null);
-  let recepie = method;
 
   const redirectFoo = () => {
     window.open(url, "_blank");
@@ -50,9 +49,9 @@ const Offer = () => {
   }
   useEffect(() => {
     window.scrollTo(0, 0);
-    const fetchSmoothie = async () => {
+    const fetchOffers = async () => {
       const { data, error } = await supabase
-        .from("smoothies") // pobranie z tabeli
+        .from("offers") // pobranie z tabeli
         .select() // zwracanie daty
         .eq("id", id) //linijka odpowiedzialna za filtrowanie zwraca jeżeli kolumna "id" jest równa zmiennej id
         .single();
@@ -62,7 +61,7 @@ const Offer = () => {
       }
       if (data) {
         setTitle(data.title);
-        setMethod(data.recepie);
+        setMethod(data.description);
         setUrl(data.link_url);
         setCompany_Name(data.company_name);
         setSalaryLow(data.salary_low);
@@ -71,7 +70,7 @@ const Offer = () => {
         setPosition_Level(data.position_level);
         setCategoryLogo(data.category_logo);
         setData(data.created_at);
-        console.log(data);
+        //console.log(data);
       }
       /* MOZE ZOSTANIE UŻYTE
       function helperFoo(d, e) {
@@ -90,7 +89,7 @@ const Offer = () => {
       helperFoo(data, error);
       */
     };
-    fetchSmoothie(); // invoke funkcji na koniec parsowaniaHooka
+    fetchOffers(); // invoke funkcji na koniec parsowaniaHooka
   }, [id, navigate]);
 
   return (
@@ -101,12 +100,12 @@ const Offer = () => {
         </div>
         <div className="offer-view_topsection">
           <div>
-            {/*Style pożyczone ze smoothie card */}
-            <p className="smoothies_main-company">
+            {/*Style pożyczone z card */}
+            <p className="offer_main-company">
               <i className="material-icons offer-icon">business</i>
               {company_name.toUpperCase()}
             </p>
-            <p className="smoothies_main-location">
+            <p className="offer_main-location">
               <i className="material-icons offer-icon">place</i>
               {location.toUpperCase()}
             </p>
@@ -125,7 +124,7 @@ const Offer = () => {
           <h2>OPIS STANOWISKA</h2>
         </div>
         <pre>
-          <p>{method}</p>
+          <p>{description}</p>
         </pre>
         <div className="break"></div>
         <button className="update_btn" onClick={redirectFoo}>

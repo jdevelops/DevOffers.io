@@ -26,6 +26,22 @@ const About = () => {
           Supabase — Kompleksowy zestaw narzędzi do tworzenia i wdrażania
           aplikacji oraz gier mobilnych, bazującym na usługach chmurowych
         </li>
+        <h4>Dodatkowe zasoby</h4>
+        <li>
+          Ikony kategorii -
+          <a href="https://www.flaticon.com/free-icons/php" title="php icons">
+            Php icons created by Nadiinko - Flaticon
+          </a>
+        </li>
+        <li>
+          ico file -
+          <a
+            href="https://www.flaticon.com/free-icons/letter-d"
+            title="letter d icons"
+          >
+            Letter d icons created by moniruldislam - Flaticon
+          </a>
+        </li>
       </ul>
       <br />
       <br />

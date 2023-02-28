@@ -69,8 +69,6 @@ nav h1 {
   margin: auto;
   padding: 20px;
 }
-.home {
-}
 
 .home__title {
   text-align: center;
@@ -79,15 +77,15 @@ nav h1 {
   font-size: 3rem;
 }
 
-/* smoothies list */
-.smoothies_list {
+/* offers list */
+.offers_list {
   width: inherit;
   margin-top: 40px;
   display: flex;
   flex-direction: column;
   gap: 2rem;
 }
-.smoothies_card {
+.offers_card {
   width: 100%;
   height: 180px;
   background: var(--White);
@@ -109,18 +107,18 @@ nav h1 {
   line-height: 0px;
   text-align: center;
 }
-.smoothies_card .buttons {
+.offers_card .buttons {
   text-align: right;
 }
 
-.smoothies_logo-div {
+.offers_logo-div {
   height: 100%;
   width: 120px;
   display: flex;
   justify-content: center;
   align-items: center;
 }
-.smoothies_logo {
+.offers_logo {
   display: block;
   margin-left: auto;
   margin-right: auto;
@@ -128,24 +126,24 @@ nav h1 {
 }
 
 /* ======Główna część karty= ==========*/
-.smoothies_main {
+.offers_main {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 }
 
-.smoothies_main h2 {
+.offers_main h2 {
   padding: 0 0 0.3rem 0;
 }
-.smoothies_main p {
+.offers_main p {
   margin: 0;
 }
 
-.smoothies_main-data {
+.offers_main-data {
   color: var(--DarkGrey);
   opacity: 0.85;
 }
-.smoothies_main-company {
+.offers_main-company {
   margin-right: 1rem;
   width: auto;
   display: flex;
@@ -170,29 +168,29 @@ nav h1 {
   font-size: 26px;
   padding-right: 0.33rem;
 }
-.smoothies_main-secondline {
+.offers_main-secondline {
   display: flex;
 }
-.smoothies_main-location {
+.offers_main-location {
   color: var(--DarkGrey);
   width: auto;
   display: flex;
   align-items: center;
 }
 /* ======Boczna część karty= ==========*/
-.smoothies_side {
+.offers_side {
   display: flex;
   flex-direction: column;
   margin-left: auto;
   justify-content: space-between;
 }
 
-.smoothies_side-open-helper {
+.offers_side-open-helper {
   display: flex;
   justify-content: end;
   align-items: end;
 }
-.smoothies_side-open {
+.offers_side-open {
   width: 64px;
   height: 64px;
   background-color: #eeeeee;
@@ -212,12 +210,12 @@ a:visited {
   text-decoration: none;
 }
 
-.smoothies_side-buttons {
+.offers_side-buttons {
   display: flex;
   justify-content: end;
   align-items: end;
 }
-.smoothies_side-buttons i {
+.offers_side-buttons i {
   margin-left: 0.5rem;
 }
 
@@ -324,8 +322,7 @@ form button {
   align-items: center;
   flex-wrap: wrap;
 }
-.salary-div h3 {
-}
+
 .salary-div input {
   width: 40%;
 }
@@ -342,6 +339,7 @@ input::-webkit-inner-spin-button {
 
 /* Works for Firefox */
 input[type="number"] {
+  appearance: textfield;
   -moz-appearance: textfield;
 }
 
@@ -656,25 +654,25 @@ input[type="number"] {
   }
 
   /*===========card=============*/
-  .smoothies_card {
+  .offers_card {
     height: 200px;
   }
 
-  .smoothies_main > div > h2 {
+  .offers_main > div > h2 {
     font-size: 1rem;
     padding-bottom: 0.5rem;
   }
-  .smoothies_main-data {
+  .offers_main-data {
     font-size: 0.75rem;
   }
-  .smoothies_main-location {
+  .offers_main-location {
     font-size: 0.75rem;
   }
 
-  .smoothies_main-company {
+  .offers_main-company {
     font-size: 0.8rem;
   }
-  .smoothies_logo-div {
+  .offers_logo-div {
     width: 100px;
   }
 
@@ -765,25 +763,25 @@ input[type="number"] {
   }
 
   /*===========card=============*/
-  .smoothies_card {
+  .offers_card {
     height: 200px;
   }
 
-  .smoothies_main > div > h2 {
+  .offers_main > div > h2 {
     font-size: 1rem;
     padding-bottom: 0.5rem;
   }
-  .smoothies_main-data {
+  .offers_main-data {
     font-size: 0.75rem;
   }
-  .smoothies_main-location {
+  .offers_main-location {
     font-size: 0.75rem;
   }
 
-  .smoothies_main-company {
+  .offers_main-company {
     font-size: 0.8rem;
   }
-  .smoothies_logo-div {
+  .offers_logo-div {
     width: 100px;
   }
 
@@ -862,7 +860,7 @@ input[type="number"] {
 
   /*===========card=============*/
 
-  .smoothies_logo-div {
+  .offers_logo-div {
     display: none;
   }
 
@@ -871,7 +869,7 @@ input[type="number"] {
     padding: 0.8rem 0.75rem;
     font-size: 0.65rem;
   }
-  .smoothies_card {
+  .offers_card {
     height: 180px;
     padding: 1rem;
   }

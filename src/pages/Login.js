@@ -33,8 +33,6 @@ const Login = ({ setToken }) => {
       console.log(data);
       setToken(data);
       navigate("/homepage");
-
-      //   alert('Check your email for verification link')
     } catch (error) {
       alert(error);
     }

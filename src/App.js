@@ -49,7 +49,6 @@ function App() {
         {token && <Link to="/homepage">Profil</Link>}
         {!token && <Link to="/login">Login</Link>}
       </nav>
-
       <Routes>
         <Route path="/" element={<Home token={token} />} />
         {token ? (

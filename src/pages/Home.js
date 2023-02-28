@@ -4,11 +4,11 @@ import { useEffect, useState } from "react";
 
 // components
 
-import SmoothieCard from "../components/smoothieCard";
+import OfferCard from "../components/offerCard";
 
 const Home = ({ token }) => {
   const [fetchError, setFetchError] = useState(null); // miejsce przechowywania danych  Tzw. State Reacta
-  const [smoothies, setSmoothies] = useState(null); // miejsce przechowywania danych  Tzw. State Reacta
+  const [offers, setOffers] = useState(null); // miejsce przechowywania danych  Tzw. State Reacta
   const [orderLocaly, setOrderLocaly] = useState("domyślne");
   const [favFlag, setFavFlag] = useState(false);
   const [orderAscd, setOrderAscd] = useState(true);
@@ -18,18 +18,16 @@ const Home = ({ token }) => {
   const orderBy = "created_at"; // zmienna wskazująca na jakiej podstawie fetch sortuje dane
   //Funkcja usuwająca wpis lokalnie
   const handleDelete = (id) => {
-    setSmoothies((pervSmoothies) => {
-      return pervSmoothies.filter((sm) => sm.id !== id);
+    setOffers((pervOffers) => {
+      return pervOffers.filter((sm) => sm.id !== id);
     });
   };
   //Funcjka sortująca
   function handleSortEffect(e) {
-    console.log(e.target.id);
     //setSortEffect(e.target.id);
     zmiennaEffect = e.target.id;
     switch (zmiennaEffect) {
       case "az":
-        console.log(e.target);
         e.target.classList.add("searchbar--active");
         break;
       case "data":
@@ -45,25 +43,26 @@ const Home = ({ token }) => {
 
   //funkcja fetchujaca dane z database
   useEffect(() => {
-    const fetchSmoothies = async () => {
+    const fetchOffers = async () => {
       const { data, error } = await supabase
-        .from("smoothies")
+        .from("offers")
         .select()
-        .order(orderBy, { ascending: false }); // const { data, error } -> destrukturyzacja obiektu po lewej
+        .order(orderBy, { ascending: false });
 
       if (error) {
-        setFetchError("Can;t fetch ");
-        setSmoothies(null);
-        console.log(error);
+        setFetchError("Can't fetch");
+        setOffers(null);
+        console.log(error, fetchError);
       }
       if (data) {
-        setSmoothies(data);
+        console.log(data);
+        setOffers(data);
         setFetchError(null);
       }
     };
 
-    fetchSmoothies();
-  }, []); //[orderBy] powoduje wywołanie Hooka useEffect za każdym użyciem orderby // brak tylko pojedyncze wywołanie
+    fetchOffers();
+  }, []);
 
   return (
     <div className="page">
@@ -71,14 +70,14 @@ const Home = ({ token }) => {
       <div className="home">
         <h1 className="home__title">OFERTY</h1>
         {fetchError && <p>{fetchError}</p>}
-        {smoothies && (
-          <div className="smoothies">
+        {offers && (
+          <div className="offers">
             {/*debug */}
             <div className="debug hidden">
               <button
                 onClick={() => {
-                  console.log("found users: ");
-                  console.log(smoothies);
+                  console.log("found offers: ");
+                  console.log(offers);
                 }}
               >
                 DEBUG
@@ -101,7 +100,7 @@ const Home = ({ token }) => {
                   id="data"
                   onClick={(obj) => {
                     handleSortEffect(obj);
-                    smoothies.sort(function (a, b) {
+                    offers.sort(function (a, b) {
                       const dateA = a.created_at;
                       const dateB = b.created_at;
                       if (dateA > dateB) {
@@ -113,12 +112,12 @@ const Home = ({ token }) => {
                       return 0;
                     });
                     if (orderAscd) {
-                      setSmoothies(smoothies.reverse());
+                      setOffers(offers.reverse());
                       setOrderLocaly("Najstarsze najpierw ");
                       setOrderAscd(!orderAscd);
                     } else if (!orderAscd) {
                       setOrderLocaly("Najnowsze najpierw");
-                      setSmoothies(smoothies);
+                      setOffers(offers);
                       setOrderAscd(!orderAscd);
                     }
                   }}
@@ -130,7 +129,7 @@ const Home = ({ token }) => {
                   id="az"
                   onClick={(obj) => {
                     handleSortEffect(obj);
-                    smoothies.sort(function (a, b) {
+                    offers.sort(function (a, b) {
                       const nameA = a.title.toUpperCase(); // ignore upper and lowercase
                       const nameB = b.title.toUpperCase(); // ignore upper and lowercase
                       if (nameA > nameB) {
@@ -143,12 +142,12 @@ const Home = ({ token }) => {
                       return 0;
                     });
                     if (orderAscd) {
-                      setSmoothies(smoothies.reverse());
+                      setOffers(offers.reverse());
                       setOrderLocaly("Alfabetycznie rosnoąco");
                       setOrderAscd(!orderAscd);
                     } else if (!orderAscd) {
                       setOrderLocaly("Alfabetycznie malejąco");
-                      setSmoothies(smoothies);
+                      setOffers(offers);
                       setOrderAscd(!orderAscd);
                     }
                   }}
@@ -159,7 +158,8 @@ const Home = ({ token }) => {
                   id="salary"
                   onClick={(obj) => {
                     handleSortEffect(obj);
-                    smoothies.sort(function (a, b) {
+                    console.log(obj);
+                    offers.sort(function (a, b) {
                       const salaryRangeA = (a.salary_low + a.salary_top) / 2;
                       const salaryRangeB = (b.salary_low + b.salary_top) / 2;
                       if (salaryRangeA < salaryRangeB) {
@@ -171,11 +171,11 @@ const Home = ({ token }) => {
                       return 0;
                     });
                     if (orderAscd) {
-                      setSmoothies(smoothies.reverse());
-                      setOrderLocaly("widełki rosnoąco");
+                      setOffers(offers.reverse());
+                      setOrderLocaly("widełki rosnąco");
                       setOrderAscd(!orderAscd);
                     } else if (!orderAscd) {
-                      setSmoothies(smoothies);
+                      setOffers(offers);
                       setOrderLocaly("widełki malejąco");
                       setOrderAscd(!orderAscd);
                     }
@@ -202,9 +202,9 @@ const Home = ({ token }) => {
               </div>
             </div>
 
-            {/*WYSWIETLANIE POSTÓW Z FILTREM I SORTOWANIEM DODAĆ ULUBIONE */}
-            <div className="smoothies_list">
-              {smoothies
+            {/*WYSWIETLANIE POSTÓW Z FILTREM I SORTOWANIEM */}
+            <div className="offers_list">
+              {offers
                 .filter((post) => {
                   if (query === "") {
                     return post;
@@ -218,9 +218,9 @@ const Home = ({ token }) => {
                   if (favFlag) {
                     if (post.liked_by.includes(token.user.id)) {
                       return (
-                        <SmoothieCard
+                        <OfferCard
                           key={post.id}
-                          smoothie={post}
+                          offer={post}
                           onDeleteProp={handleDelete}
                           token={token}
                         />
@@ -228,9 +228,9 @@ const Home = ({ token }) => {
                     }
                   } else {
                     return (
-                      <SmoothieCard
+                      <OfferCard
                         key={post.id}
-                        smoothie={post}
+                        offer={post}
                         onDeleteProp={handleDelete}
                         token={token}
                       />
@@ -256,8 +256,8 @@ export default Home;
   };
 
   if (searchInput.length > 0) {
-    smoothies.filter((smoothie) => {
-      return smoothie.title.match(searchInput);
+    offers.filter((offer) => {
+      return offer.title.match(searchInput);
     });
   }
   /// */

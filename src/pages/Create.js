@@ -8,7 +8,7 @@ const Create = () => {
   const navigate = useNavigate(); //  Hook reacta pozwalający na przekierowanie użytkownika na inna strone zgodnie z routerem
   const [title, setTitle] = useState("");
   const [company_name, setCompany_Name] = useState("");
-  const [method, setMethod] = useState(""); // potencjalnie zmienić na recepie
+  const [description, setDescription] = useState(""); //
   const [salary_low, setSalaryLow] = useState("");
   const [salary_top, setSalaryTop] = useState("");
   const [url, setUrl] = useState("");
@@ -16,7 +16,7 @@ const Create = () => {
   const [position_level, setPosition_Level] = useState("Mid"); // zmienna przechowująca radio buttons state
   const [inputError, setInputError] = useState("false"); // zmienna obsługująca errory
   const [inputErrordsc, setInputErrordDsc] = useState(""); // zmiena zaiwerajaca opisy errorów
-  let recepie = method; // zmienone aby zgadzała się nazwa z tablica
+
   let created_by; // zmienone aby zgadzała się nazwa z tablica, w tabeli jest created_by
   let link_url = url; // zmienone aby zgadzała się nazwa z tablica
 
@@ -87,6 +87,8 @@ const Create = () => {
     } = await supabase.auth.getUser();
     created_by = user.id;
 
+    console.log(user.id);
+
     const submitValidation = () => {
       //walidacja danych
       setInputError("false");
@@ -95,7 +97,6 @@ const Create = () => {
       //sprawdzanie tytułu
       if (!title || title.length >= 100) {
         alert("Sprawdź poprawność formularza");
-        console.log("called");
         setInputError("title");
         setInputErrordDsc(
           "Upewnij się że został wprowadzony tytuł oraz jest on krótszy niż 100 znaków "
@@ -122,11 +123,6 @@ const Create = () => {
       }
       //sprawdzanie widełek
       if (salary_low > salary_top || salary_low <= 0 || salary_top <= 0) {
-        console.log(salary_low > salary_top);
-        console.log(salary_low <= 0);
-        console.log(salary_top <= 0);
-        console.log(salary_low);
-        console.log(typeof salary_top);
         alert("Sprawdź poprawność formularza");
         setInputError("salary");
         setInputErrordDsc(
@@ -135,9 +131,13 @@ const Create = () => {
         return 0;
       }
       //sprawdzanie texztarea
-      if (!method || method.length <= 40 || method.length >= 2500) {
+      if (
+        !description ||
+        description.length <= 40 ||
+        description.length >= 25000
+      ) {
         alert("Sprawdź poprawność formularza");
-        setInputError("method");
+        setInputError("description");
         setInputErrordDsc(
           "Upewnij się że opis jest wprowadzony i zawiera przynajmniej 40 znaków "
         );
@@ -165,14 +165,14 @@ const Create = () => {
       console.log("debug");
       // wywołanie funkcji w ifie
       const { data, error } = await supabase
-        .from("smoothies") // wyszukuje z supabase tabli o nazwie "smoothies"
+        .from("offers") // wyszukuje z supabase tabli o nazwie "offers"
         .insert([
           {
             title,
             company_name,
             category,
             category_logo,
-            recepie,
+            description,
             location,
             created_by,
             link_url,
@@ -204,7 +204,7 @@ const Create = () => {
     if (data) {
       // jeżelei w obieckie wystąpi data, data- zwraca zawartość przesłaną za pomocną await supabase
       navigate("./");
-      console.log(data);
+      (data);
       setFormError(null); // resetujemy error
       navigate("./"); // prekierowanie użytkoiwnika na stronę główną po ścieżce ./
     }
@@ -212,7 +212,7 @@ const Create = () => {
  */
   // insert musi zgadzać się z nazwami kolumn w tabeli oraz z nazwami zmiennych w komponencie
 
-  //console.log(title, method, rating);
+  //console.log(title, description, rating);
 
   // funkcja obługująca submit formularza, async ponieważ w środku będziemy używać awaita i promisa
   return (
@@ -362,21 +362,21 @@ const Create = () => {
             PLN
           </div>
         </div>
-        <label htmlFor="method">Opis:</label>
+        <label htmlFor="description">Opis:</label>
         <span className="error_dsc">
-          {inputError === "method" ? inputErrordsc : ""}
+          {inputError === "description" ? inputErrordsc : ""}
         </span>
         <textarea
           rows="20"
           className={
-            inputError === "method"
+            inputError === "description"
               ? "update_textarea error_border"
               : "update_textarea"
           }
-          id="method"
-          value={method}
+          id="description"
+          value={description}
           onChange={(e) => {
-            setMethod(e.target.value);
+            setDescription(e.target.value);
             setInputError("");
             setInputErrordDsc("");
           }}

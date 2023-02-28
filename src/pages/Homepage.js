@@ -24,7 +24,6 @@ const Homepage = ({ token }) => {
       data: { user },
     } = await supabase.auth.getUser();
     //console.log(user);
-    console.log(email);
   }
 
   //funkcja logout
@@ -32,6 +31,7 @@ const Homepage = ({ token }) => {
     sessionStorage.removeItem("token");
     supabase.auth.signOut();
     token = false;
+    localStorage.clear();
     navigate("/", { token });
     window.location.reload(true);
   }
