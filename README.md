@@ -1,2 +1,0 @@
-# DevOffers.io
- test
