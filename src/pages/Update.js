@@ -10,7 +10,7 @@ const Update = () => {
 
   const [title, setTitle] = useState("");
   const [company_name, setCompany_Name] = useState("");
-  const [method, setMethod] = useState(""); // potencjalnie zmienić na recepie
+  const [description, setMethod] = useState(""); // potencjalnie zmienić na recepie
   const [salary_low, setSalaryLow] = useState(0);
   const [salary_top, setSalaryTop] = useState(10);
   const [position_level, setPosition_Level] = useState("Mid");
@@ -19,7 +19,6 @@ const Update = () => {
   const [fromError, setFormError] = useState();
   const [inputError, setInputError] = useState("false"); // zmienna obsługująca errory
   const [inputErrordsc, setInputErrordDsc] = useState(""); // zmiena zaiwerajaca opisy errorów
-  let recepie = method;
   let link_url = url;
   // UPDATE formularza
   ///REACT SELECT
@@ -67,7 +66,7 @@ const Update = () => {
       //sprawdzanie tytułu
       if (!title || title.length >= 100) {
         alert("Sprawdź poprawność formularza");
-        console.log("called");
+
         setInputError("title");
         setInputErrordDsc(
           "Upewnij się że został wprowadzony tytuł oraz jest on krótszy niż 100 znaków "
@@ -94,11 +93,6 @@ const Update = () => {
       }
       //sprawdzanie widełek
       if (salary_low > salary_top || salary_low <= 0 || salary_top <= 0) {
-        console.log(salary_low > salary_top);
-        console.log(salary_low <= 0);
-        console.log(salary_top <= 0);
-        console.log(salary_low);
-        console.log(typeof salary_top);
         alert("Sprawdź poprawność formularza");
         setInputError("salary");
         setInputErrordDsc(
@@ -107,9 +101,13 @@ const Update = () => {
         return 0;
       }
       //sprawdzanie texztarea
-      if (!method || method.length <= 40 || method.length >= 2500) {
+      if (
+        !description ||
+        description.length <= 40 ||
+        description.length >= 2500
+      ) {
         alert("Sprawdź poprawność formularza");
-        setInputError("method");
+        setInputError("description");
         setInputErrordDsc(
           "Upewnij się że opis jest wprowadzony i zawiera przynajmniej 40 znaków "
         );
@@ -136,14 +134,14 @@ const Update = () => {
       console.log("debug");
       // wywołanie funkcji w ifie
       const { data, error } = await supabase
-        .from("smoothies") // wyszukuje z supabase tabli o nazwie "smoothies"
+        .from("offers") // wyszukuje z supabase tabli o nazwie "offers"
         .update([
           {
             title,
             company_name,
             category,
             category_logo,
-            recepie,
+            description,
             location,
             link_url,
             position_level,
@@ -167,9 +165,9 @@ const Update = () => {
   };
 
   useEffect(() => {
-    const fetchSmoothie = async () => {
+    const fetchOffer = async () => {
       const { data, error } = await supabase
-        .from("smoothies") // pobranie z tabeli
+        .from("offers") // pobranie z tabeli
         .select() // zwracanie daty
         .eq("id", id) //linijka odpowiedzialna za filtrowanie zwraca jeżeli kolumna "id" jest równa zmiennej id
         .single();
@@ -180,7 +178,7 @@ const Update = () => {
       if (data) {
         setTitle(data.title);
         setCompany_Name(data.company_name);
-        setMethod(data.recepie);
+        setMethod(data.description);
         setUrl(data.link_url);
         setPosition_Level(data.position_level);
         setSalaryLow(data.salary_low);
@@ -188,24 +186,8 @@ const Update = () => {
         setLocation(data.location);
         setCategory(data.category);
       }
-      /* MOZE ZOSTANIE UŻYTE
-      function helperFoo(d, e) {
-        if (d !== null) {
-          console.log(d, e);
-          console.log("data is not null");
-        } else if (e !== null) {
-          console.log(d, e);
-          console.log("error is not null");
-          navigate("/", { replace: true });
-        } else {
-          console.log(d, e);
-          console.log("idk what happend");
-        }
-      }
-      helperFoo(data, error);
-      */
     };
-    fetchSmoothie(); // invoke funkcji na koniec parsowaniaHooka
+    fetchOffer(); // invoke funkcji na koniec parsowaniaHooka
   }, [id, navigate]);
 
   return (
@@ -356,19 +338,19 @@ const Update = () => {
             PLN
           </div>
         </div>
-        <label htmlFor="method">Opis:</label>
+        <label htmlFor="description">Opis:</label>
         <span className="error_dsc">
-          {inputError === "method" ? inputErrordsc : ""}
+          {inputError === "description" ? inputErrordsc : ""}
         </span>
         <textarea
           rows="20"
           className={
-            inputError === "method"
+            inputError === "description"
               ? "update_textarea error_border"
               : "update_textarea"
           }
-          id="method"
-          value={method}
+          id="description"
+          value={description}
           onChange={(e) => {
             setMethod(e.target.value);
             setInputError("");
