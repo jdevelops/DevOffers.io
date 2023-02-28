@@ -1,10 +1,7 @@
 ////TODO////
 
 WYGLĄD APLIKACJI ==>
-    RESPONSIVE
     
-PRZEPISANIE APKI 
-
 IKONKI  ==> 
     DODAĆ CREDITSY
 
@@ -12,8 +9,6 @@ IKONKI  ==>
 /////OPCJONALN
     WIDOMOŚĆ JEŚLI PROFIL WYŚWIETLA BRAK OFERT 
     DODAĆ MOŻLWIOŚĆ ZMIANY DANYCH UŻYTKOWNIK
+dopisać useeffect hooka do strony create w celu sprawdzenia tokenu => zablokować dostęp bez tokenu 
 
-
-////TO FIX IF POSSIBLE
-    RELOG NA STRONIE ZALOGOWANIA WYSYPUJE BŁĄD
-
+    
